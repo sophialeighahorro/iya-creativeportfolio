@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publication Materials | Iya's Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=VT323&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="page-header">
+        <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+        <h1>Publication Materials</h1>
+    </header>
+
+    <section class="gallery-container">
+        <div class="masonry-grid">
+            <img src="images/pubmat1.png" alt="Saan Aabot Ang Org Mo: The Real Impact of College Organizations" data-desc="Developed the visual branding for the webinar's Facebook page, creating a unified suite of
+                publication materials to drive attendee engagement." onclick="openModal(this)">
+            <img src="images/pubmat2.png" alt="Saan Aabot Ang Org Mo: The Real Impact of College Organizations" data-desc="Developed the visual branding for the webinar's Facebook page, creating a unified suite of
+                publication materials to drive attendee engagement." onclick="openModal(this)">
+            <img src="images/pubmat3.png" alt="TechFiesta 2.0: Moriones Festival" data-desc="Created promotional publication materials (pubmats) to support the game’s, &quot;The Forsaken Soldier&quot;, marketing and showcase presentation." onclick="openModal(this)">
+            <img src="images/pubmat4.png" alt="Saan Aabot Ang Org Mo: The Real Impact of College Organizations" data-desc="Developed the visual branding for the webinar's Facebook page, creating a unified suite of
+                publication materials to drive attendee engagement." onclick="openModal(this)">
+            <img src="images/pubmat5.png" alt="Saan Aabot Ang Org Mo: The Real Impact of College Organizations" data-desc="Developed the visual branding for the webinar's Facebook page, creating a unified suite of
+                publication materials to drive attendee engagement." onclick="openModal(this)">
+            <img src="images/pubmat6.png" alt="Saan Aabot Ang Org Mo: The Real Impact of College Organizations" data-desc="Developed the visual branding for the webinar's Facebook page, creating a unified suite of
+                publication materials to drive attendee engagement." onclick="openModal(this)">
+            <img src="images/pubmat7.jpg" alt="ThinkFast: NUWC Ideathon Challenge" data-desc="Designed a series of promotional materials for the NUWC Ideathon Challenge, ensuring a cohesive visual identity that effectively communicated the event's theme and attracted participants." onclick="openModal(this)">
+            <img src="images/pubmat8.jpg" alt="ThinkFast: NUWC Ideathon Challenge" data-desc="Designed a series of promotional materials for the NUWC Ideathon Challenge, ensuring a cohesive visual identity that effectively communicated the event's theme and attracted participants." onclick="openModal(this)">
+            <img src="images/pubmat9.jpg" alt="ThinkFast: NUWC Ideathon Challenge" data-desc="Designed a series of promotional materials for the NUWC Ideathon Challenge, ensuring a cohesive visual identity that effectively communicated the event's theme and attracted participants." onclick="openModal(this)">
+            <img src="images/pubmat10.png" alt="Build-a-Block: Into the Blockhain Jungle" data-desc="Designed a publication material for the Build-a-Block: Into the Blockchain Jungle webinar, creating a cohesive visual identity that effectively communicated the event's theme and attracted attendees." onclick="openModal(this)">
+            <img src="images/pubmat11.png" alt="Zero to One with Firebase Studio" data-desc="Designed a series of publication materials for Zero to One with Firebase Studio, creating a cohesive visual identity that effectively communicated the event's theme and attracted attendees." onclick="openModal(this)">
+            <img src="images/pubmat12.png" alt="Zero to One with Firebase Studio" data-desc="Designed a series of publication materials for Zero to One with Firebase Studio, creating a cohesive visual identity that effectively communicated the event's theme and attracted attendees." onclick="openModal(this)">
+            <img src="images/pubmat13.jpg" alt="Identity Stack: Building Your Personal Tech Stack" data-desc="Designed a series of publication materials for Identity Stack: Building Your Personal Tech Stack, creating a cohesive visual identity that effectively communicated the event's theme and attracted attendees." onclick="openModal(this)">
+            <img src="images/pubmat14.jpg" alt="Identity Stack: Building Your Personal Tech Stack" data-desc="Designed a series of publication materials for Identity Stack: Building Your Personal Tech Stack, creating a cohesive visual identity that effectively communicated the event's theme and attracted attendees." onclick="openModal(this)">
+            <img src="images/pubmat15.jpg" alt="Identity Stack: Building Your Personal Tech Stack" data-desc="Designed a series of publication materials for Identity Stack: Building Your Personal Tech Stack, creating a cohesive visual identity that effectively communicated the event's theme and attracted attendees." onclick="openModal(this)">
+            <img src="images/pubmat16.png" alt="Revert: NUWC General Assembly" data-desc="Designed a publication material for Revert: NUWC General Assembly, creating a cohesive visual identity that effectively communicated the event's theme and attracted attendees." onclick="openModal(this)">
+        </div>
+    </section>
+
+    <div id="myModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="img01">
+        <div id="caption"></div>
+        <div id="description"></div>
+    </div>
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById("myModal");
+        
+        // Get the image and text elements inside the modal
+        var modalImg = document.getElementById("img01");
+        var captionText = document.getElementById("caption");
+        var descText = document.getElementById("description");
+
+        // function to OPEN the modal
+        function openModal(element) {
+            modal.style.display = "block";
+            modalImg.src = element.src;          // 1. Copy the image source
+            captionText.innerHTML = element.alt; // 2. Copy the Title (alt text)
+            descText.innerHTML = element.dataset.desc; // 3. Copy the Description
+        }
+
+        // function to CLOSE the modal
+        function closeModal() {
+            modal.style.display = "none";
+        }
+
+        // Close if user clicks outside the image
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
+    <footer>
+        <p>&copy; 2026 Iya. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
