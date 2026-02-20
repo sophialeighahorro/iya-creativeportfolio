@@ -509,3 +509,61 @@ footer p {
         width: 95%;
     }
 }
+
+/* ===========================
+   MOBILE RESPONSIVE STYLES
+   =========================== */
+@media (max-width: 768px) {
+    
+    /* 1. HERO SECTION */
+    .hero h1 {
+        font-size: 5rem; /* Shrinks the massive text to fit phone screens */
+    }
+    .italic-word {
+        font-size: 5rem; 
+    }
+    .gradient-btn {
+        font-size: 1.2rem;
+        padding: 10px 20px;
+    }
+
+    /* 2. ABOUT ME SECTION */
+    .about-content {
+        flex-direction: column; /* Stacks your image on top of your text */
+        gap: 20px;
+        text-align: center; /* Centers your bio text on mobile */
+    }
+
+    .about-image img {
+        width: 100%; /* Stops the image from breaking the screen width */
+        max-width: 320px; 
+        margin-left: 0; /* Removes the negative margin pushing it off-screen */
+        margin-right: 15px;
+        margin-bottom: 20px;
+    }
+
+    .about-text h2 {
+        font-size: 3.5rem; 
+    }
+
+    .about-text p {
+        font-size: 0.9rem; 
+    }
+
+    /* 3. MY WORKS SECTION */
+    .content-list {
+        height: auto; /* Removes the 100vh lock so stacked items don't overflow */
+        min-height: 100vh; 
+        padding: 80px 0; 
+    }
+
+    .works-title {
+        font-size: 4rem; 
+    }
+
+    .works-grid {
+        gap: 40px; /* Reduces the massive 80px gap */
+        flex-direction: column; /* Stacks your icons vertically */
+        align-items: center;
+    }
+}
