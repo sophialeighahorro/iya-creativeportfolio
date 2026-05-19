@@ -393,20 +393,17 @@ footer p {
     column-gap: 20px; /* Space between columns */
 }
 
-.masonry-grid img {
-    width: 100%; /* Forces image to fit the column width */
-    margin-bottom: 20px; /* Space between images vertically */
-    border-radius: 10px; /* Optional: Rounded corners */
-    display: block; /* Removes weird gaps */
-    
-    /* Important: Prevents images from getting cut in half */
+.masonry-grid img, .masonry-grid video {
+    width: 100%; 
+    margin-bottom: 20px; 
+    border-radius: 10px; 
+    display: block; 
     break-inside: avoid; 
-    
     transition: transform 0.3s ease;
 }
 
-.masonry-grid img:hover {
-    transform: scale(1.02); /* Slight zoom on hover */
+.masonry-grid img:hover, .masonry-grid video:hover {
+    transform: scale(1.02); 
     cursor: pointer;
 }
 
@@ -510,6 +507,55 @@ footer p {
     }
 }
 
+/* ===========================
+   AUDIO PAGE STYLES
+   =========================== */
+
+/* Creates a responsive grid that adjusts based on screen size */
+.audio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 20px;
+}
+
+/* The card that holds the text and the player */
+.audio-card {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 15px;
+    text-align: center;
+    border: 2px solid #e0e0e0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.audio-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+.audio-card h3 {
+    font-family: 'VT323', monospace;
+    font-size: 2rem;
+    font-weight: normal;
+    color: #282828;
+    margin-bottom: 5px;
+}
+
+.audio-card p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/* Makes sure both audio and video players stretch nicely inside the card */
+.audio-card audio, 
+.audio-card video {
+    width: 100%;
+    border-radius: 8px;
+    outline: none;
+}
 /* ===========================
    MOBILE RESPONSIVE STYLES
    =========================== */

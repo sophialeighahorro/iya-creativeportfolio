@@ -52,49 +52,79 @@
             <img src="images/project17.jpg" alt="&quot;Anna&quot;- Short Film Production" data-desc="Designed key marketing assets, including the official film poster and production logo, to
             establish the film's brand.
             " onclick="openModal(this)">
-            <img src="images/project18.png" alt="SignSnap: Gamified ASL Learning App with Motion Detection" data-desc="Designing the overall user interface and visual assets of our capstone project using Canva and Ibis Paint, ensuring a cohesive, engaging, and user-friendly visual experience across all modules." onclick="openModal(this)">
-            <img src="images/project19.png" alt="SignSnap: Gamified ASL Learning App with Motion Detection" data-desc="Designing the overall user interface and visual assets of our capstone project using Canva and Ibis Paint, ensuring a cohesive, engaging, and user-friendly visual experience across all modules." onclick="openModal(this)">
-            <img src="images/project20.png" alt="SignSnap: Gamified ASL Learning App with Motion Detection" data-desc="Designing the overall user interface and visual assets of our capstone project using Canva and Ibis Paint, ensuring a cohesive, engaging, and user-friendly visual experience across all modules." onclick="openModal(this)">
-            
+            <img src="images/project21.png" alt="NU Posa: A Campus Cat Information System" data-desc="Designed the complete User Interface (UI) and visual layout using Figma, focusing
+            on intuitive navigation and a cohesive color scheme." onclick="openModal(this)">
+            <img src="images/project22.png" alt="NU Posa: A Campus Cat Information System" data-desc="Designed the complete User Interface (UI) and visual layout using Figma, focusing
+            on intuitive navigation and a cohesive color scheme." onclick="openModal(this)">
+            <img src="images/project23.png" alt="NU Posa: A Campus Cat Information System" data-desc="Designed the complete User Interface (UI) and visual layout using Figma, focusing
+            on intuitive navigation and a cohesive color scheme." onclick="openModal(this)">
+            <img src="images/project24.png" alt="SignSnap: Gamified Basic ASL Learning App" data-desc="Prototyped intuitive UI layouts in Figma, integrated custom animations with Procreate Dreams, and designed supporting brand assets in Canva." onclick="openModal(this)">
+            <img src="images/project25.png" alt="SignSnap: Gamified Basic ASL Learning App" data-desc="Prototyped intuitive UI layouts in Figma, integrated custom animations with Procreate Dreams, and designed supporting brand assets in Canva." onclick="openModal(this)">
+            <img src="images/project26.png" alt="SignSnap: Gamified Basic ASL Learning App" data-desc="Prototyped intuitive UI layouts in Figma, integrated custom animations with Procreate Dreams, and designed supporting brand assets in Canva." onclick="openModal(this)">
+            <img src="images/project27.png" alt="SignSnap: Gamified Basic ASL Learning App" data-desc="Prototyped intuitive UI layouts in Figma, integrated custom animations with Procreate Dreams, and designed supporting brand assets in Canva." onclick="openModal(this)">
+            <video src="videos/vid1.mp4" autoplay loop muted playsinline alt="SignSnap: Gamified Basic ASL Learning App" data-desc="A video walkthrough of the app's home page." onclick="openModal(this, 'video')"></video>
+
+
         </div>
     </section>
 
     <div id="myModal" class="modal">
         <span class="close" onclick="closeModal()">&times;</span>
         <img class="modal-content" id="img01">
+
+        <video class="modal-content" id="vid01" controls></video>
+
         <div id="caption"></div>
         <div id="description"></div>
     </div>
 
     <script>
-        // Get the modal
-        var modal = document.getElementById("myModal");
+    // 1. Get the modal background
+    var modal = document.getElementById("myModal");
+    
+    // 2. Get the image, video, and text elements inside the modal
+    var modalImg = document.getElementById("img01");
+    var modalVid = document.getElementById("vid01"); 
+    var captionText = document.getElementById("caption");
+    var descText = document.getElementById("description");
+
+    // 3. Function to OPEN the modal (Notice the new 'type' parameter)
+    function openModal(element, type) {
+        modal.style.display = "block";
         
-        // Get the image and text elements inside the modal
-        var modalImg = document.getElementById("img01");
-        var captionText = document.getElementById("caption");
-        var descText = document.getElementById("description");
+        // Copy the Title and Description for both images and videos
+        captionText.innerHTML = element.getAttribute("alt") || ""; 
+        descText.innerHTML = element.dataset.desc || ""; 
 
-        // function to OPEN the modal
-        function openModal(element) {
-            modal.style.display = "block";
-            modalImg.src = element.src;          // 1. Copy the image source
-            captionText.innerHTML = element.alt; // 2. Copy the Title (alt text)
-            descText.innerHTML = element.dataset.desc; // 3. Copy the Description
+        // IF IT IS A VIDEO:
+        if (type === 'video') {
+            modalImg.style.display = "none";     // Hide the image tag
+            modalVid.style.display = "block";    // Show the video tag
+            modalVid.src = element.src;          // Copy the video source
+            modalVid.play();                     // Auto-play it!
+        } 
+        // IF IT IS AN IMAGE:
+        else {
+            modalVid.style.display = "none";     // Hide the video tag
+            modalImg.style.display = "block";    // Show the image tag
+            modalImg.src = element.src;          // Copy the image source
         }
+    }
 
-        // function to CLOSE the modal
-        function closeModal() {
-            modal.style.display = "none";
-        }
+    // 4. Function to CLOSE the modal
+    function closeModal() {
+        modal.style.display = "none";
+        modalVid.pause(); // CRITICAL: Stops the video from playing in the background!
+        modalVid.src = ""; // Clears the video source
+    }
 
-        // Close if user clicks outside the image
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
+    // 5. Close if user clicks outside the image/video
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            closeModal(); // Uses the new close function so the video stops properly
         }
-    </script>
+    }
+</script>
 
     <footer>
         <p>&copy; 2026 Iya. All Rights Reserved.</p>
