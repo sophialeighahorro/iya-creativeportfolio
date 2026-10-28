@@ -6,125 +6,355 @@
     <title>Projects | Iya's Portfolio</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=VT323&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ===== Folder view ===== */
+        .folder-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 40px 35px;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px 24px 60px;
+        }
+
+        .folder {
+            position: relative;
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+            margin-top: 18px;
+            transition: transform 0.25s ease;
+        }
+        .folder:hover { transform: translateY(-6px); }
+
+        /* the little folder tab */
+        .folder::before {
+            content: "";
+            position: absolute;
+            top: -18px;
+            left: 0;
+            width: 90px;
+            height: 22px;
+            background: rgba(255, 255, 255, 0.18);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            border-bottom: none;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .folder-body {
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 0 14px 14px 14px;
+            overflow: hidden;
+        }
+
+        .folder-cover {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* used when a project has no photos yet */
+        .folder-cover.placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            opacity: 0.5;
+        }
+
+        .folder-info { padding: 14px 16px 16px; }
+        .folder-info h2 {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.6rem;
+            font-weight: 400;
+            margin: 0 0 4px;
+        }
+        .folder-info span {
+            font-family: 'VT323', monospace;
+            font-size: 1.2rem;
+            opacity: 0.7;
+        }
+
+        /* ===== Project detail view ===== */
+        .project-view {
+            display: none;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px 24px 60px;
+        }
+        .project-view.active { display: block; }
+
+        .project-top-link {
+            display: inline-block;
+            font-family: 'VT323', monospace;
+            font-size: 1.3rem;
+            color: inherit;
+            text-decoration: none;
+            margin-bottom: 18px;
+            opacity: 0.8;
+        }
+        .project-top-link:hover { opacity: 1; }
+
+        .project-view h2 {
+            font-family: 'Instrument Serif', serif;
+            font-size: 2.6rem;
+            font-weight: 400;
+            margin: 0 0 12px;
+        }
+        .project-desc {
+            max-width: 700px;
+            line-height: 1.6;
+            margin: 0 0 32px;
+            opacity: 0.9;
+        }
+
+        /* "Visit project" button */
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'VT323', monospace;
+            font-size: 1.3rem;
+            color: inherit;
+            text-decoration: none;
+            padding: 6px 18px;
+            border: 1px solid currentColor;
+            border-radius: 999px;
+            margin: -14px 0 32px;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+        .project-link:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .hidden { display: none !important; }
+    </style>
 </head>
 <body>
 
     <header class="page-header">
-        <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
-        <h1>Projects</h1>
+        <a href="index.html" class="back-btn" id="headerBack"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+        <h1 id="pageTitle">Projects</h1>
     </header>
 
-    <section class="gallery-container">
+    <!-- ============ FOLDER VIEW ============ -->
+    <section class="folder-grid" id="folderView">
+
+        <a class="folder" href="#signsnap">
+            <div class="folder-body">
+                <img class="folder-cover" src="images/signsnapFolder.png" alt="">
+                <div class="folder-info">
+                    <h2>SignSnap</h2>
+                </div>
+            </div>
+        </a>
+
+        <a class="folder" href="#solar">
+            <div class="folder-body">
+                <!-- swap this div for <img class="folder-cover" src="images/YOUR-COVER.png" alt=""> once you have solAR photos -->
+                <img class="folder-cover" src="images/solarFolder.png" alt="">
+                <div class="folder-info">
+                    <h2>solAR</h2>
+                </div>
+            </div>
+        </a>
+
+        <a class="folder" href="#fundamentals">
+            <div class="folder-body">
+                <img class="folder-cover" src="images/fundaFolder.png" alt="">
+                <div class="folder-info">
+                    <h2>Fundamentals</h2>
+                </div>
+            </div>
+        </a>
+
+        <a class="folder" href="#forsaken-soldier">
+            <div class="folder-body">
+                <img class="folder-cover" src="images/forsakenFolder.png" alt="">
+                <div class="folder-info">
+                    <h2>The Forsaken Soldier</h2>
+                </div>
+            </div>
+        </a>
+
+        <a class="folder" href="#anna">
+            <div class="folder-body">
+                <img class="folder-cover" src="images/annaFolder.png" alt="">
+                <div class="folder-info">
+                    <h2>Anna</h2>
+                </div>
+            </div>
+        </a>
+
+    </section>
+
+    <!-- ============ PROJECT: SignSnap ============ -->
+    <section class="project-view" id="signsnap"
+             data-title="SignSnap: Gamified Basic ASL Learning App"
+             data-desc="Prototyped intuitive UI layouts in Figma, integrated custom animations with Procreate Dreams, and designed supporting brand assets in Canva.">
+        <a href="#" class="project-top-link"><i class="fa-solid fa-folder"></i> All Projects</a>
+        <h2>SignSnap: Gamified Basic ASL Learning App</h2>
+        <p class="project-desc">Prototyped intuitive UI layouts in Figma, integrated custom animations with Procreate Dreams, and designed supporting brand assets in Canva.</p>
+        <a class="project-link" href="https://signsnap.space/" target="_blank" rel="noopener">Visit Project <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
         <div class="masonry-grid">
-            <img src="images/project1.png" alt="TechFiesta 2.0: Moriones Festival" data-desc="Designed 2D visual assets and UI elements for the mobile game &quot;The Forsaken Soldier&quot;." onclick="openModal(this)">
-            <img src="images/project2.png" alt="TechFiesta 2.0: Moriones Festival" data-desc="Designed 2D visual assets and UI elements for the mobile game &quot;The Forsaken Soldier&quot;." onclick="openModal(this)">
-            <img src="images/project3.png" alt="Fundamentals: Basketball Workout Web Application" data-desc="Designed the complete User Interface (UI) and visual layout using Figma, focusing
-            on intuitive navigation and a cohesive color scheme." onclick="openModal(this)">
-            <img src="images/project4.png" alt="Fundamentals: Basketball Workout Web Application" data-desc="Designed the complete User Interface (UI) and visual layout using Figma, focusing
-            on intuitive navigation and a cohesive color scheme." onclick="openModal(this)">
-            <img src="images/project5.png" alt="Fundamentals: Basketball Workout Web Application" data-desc="Designed the complete User Interface (UI) and visual layout using Figma, focusing
-            on intuitive navigation and a cohesive color scheme." onclick="openModal(this)">
-            <img src="images/project6.png" alt="Fundamentals: Basketball Workout Web Application" data-desc="Designed the complete User Interface (UI) and visual layout using Figma, focusing
-            on intuitive navigation and a cohesive color scheme." onclick="openModal(this)">
-            <img src="images/project7.png" alt="Fundamentals: Basketball Workout Web Application" data-desc="Designed the complete User Interface (UI) and visual layout using Figma, focusing
-            on intuitive navigation and a cohesive color scheme." onclick="openModal(this)">
-            <img src="images/project8.png" alt="Fundamentals: Basketball Workout Web Application" data-desc="Designed the complete User Interface (UI) and visual layout using Figma, focusing
-            on intuitive navigation and a cohesive color scheme." onclick="openModal(this)">
-            <img src="images/project9.png" alt="Fundamentals: Basketball Workout Web Application" data-desc="Designed the complete User Interface (UI) and visual layout using Figma, focusing
-            on intuitive navigation and a cohesive color scheme." onclick="openModal(this)">
-            <img src="images/project10.png" alt="Fundamentals: Basketball Workout Web Application" data-desc="Designed the complete User Interface (UI) and visual layout using Figma, focusing
-            on intuitive navigation and a cohesive color scheme." onclick="openModal(this)">
-            <img src="images/project11.png" alt="Fundamentals: Basketball Workout Web Application" data-desc="Designed the complete User Interface (UI) and visual layout using Figma, focusing
-            on intuitive navigation and a cohesive color scheme." onclick="openModal(this)">
-            <img src="images/project12.png" alt="Fundamentals: Basketball Workout Web Application" data-desc="Designed the complete User Interface (UI) and visual layout using Figma, focusing
-            on intuitive navigation and a cohesive color scheme." onclick="openModal(this)">
-            <img src="images/project13.png" alt="Fundamentals: Basketball Workout Web Application" data-desc="Designed the complete User Interface (UI) and visual layout using Figma, focusing
-            on intuitive navigation and a cohesive color scheme." onclick="openModal(this)">
-            <img src="images/project14.png" alt="Fundamentals: Basketball Workout Web Application" data-desc="Designed the complete User Interface (UI) and visual layout using Figma, focusing
-            on intuitive navigation and a cohesive color scheme." onclick="openModal(this)">
-            <img src="images/project15.png" alt="Fundamentals: Basketball Workout Web Application" data-desc="Designed the complete User Interface (UI) and visual layout using Figma, focusing
-            on intuitive navigation and a cohesive color scheme." onclick="openModal(this)">
-            <img src="images/project16.jpg" alt="&quot;Anna&quot;- Short Film Production" data-desc="Designed key marketing assets, including the official film poster and production logo, to
-            establish the film's brand.
-            " onclick="openModal(this)">
-            <img src="images/project17.jpg" alt="&quot;Anna&quot;- Short Film Production" data-desc="Designed key marketing assets, including the official film poster and production logo, to
-            establish the film's brand.
-            " onclick="openModal(this)">
-            <img src="images/project21.png" alt="NU Posa: A Campus Cat Information System" data-desc="Designed the complete User Interface (UI) and visual layout using Figma, focusing
-            on intuitive navigation and a cohesive color scheme." onclick="openModal(this)">
-            <img src="images/project22.png" alt="NU Posa: A Campus Cat Information System" data-desc="Designed the complete User Interface (UI) and visual layout using Figma, focusing
-            on intuitive navigation and a cohesive color scheme." onclick="openModal(this)">
-            <img src="images/project23.png" alt="NU Posa: A Campus Cat Information System" data-desc="Designed the complete User Interface (UI) and visual layout using Figma, focusing
-            on intuitive navigation and a cohesive color scheme." onclick="openModal(this)">
-            <img src="images/project24.png" alt="SignSnap: Gamified Basic ASL Learning App" data-desc="Prototyped intuitive UI layouts in Figma, integrated custom animations with Procreate Dreams, and designed supporting brand assets in Canva." onclick="openModal(this)">
-            <img src="images/project25.png" alt="SignSnap: Gamified Basic ASL Learning App" data-desc="Prototyped intuitive UI layouts in Figma, integrated custom animations with Procreate Dreams, and designed supporting brand assets in Canva." onclick="openModal(this)">
-            <img src="images/project26.png" alt="SignSnap: Gamified Basic ASL Learning App" data-desc="Prototyped intuitive UI layouts in Figma, integrated custom animations with Procreate Dreams, and designed supporting brand assets in Canva." onclick="openModal(this)">
-            <img src="images/project27.png" alt="SignSnap: Gamified Basic ASL Learning App" data-desc="Prototyped intuitive UI layouts in Figma, integrated custom animations with Procreate Dreams, and designed supporting brand assets in Canva." onclick="openModal(this)">
-            <video src="videos/vid1.mp4" autoplay loop muted playsinline alt="SignSnap: Gamified Basic ASL Learning App" data-desc="A video walkthrough of the app's home page." onclick="openModal(this, 'video')"></video>
-
-
+            <img src="images/project24.png" alt="SignSnap screen 1" onclick="openModal(this)">
+            <img src="images/project25.png" alt="SignSnap screen 2" onclick="openModal(this)">
+            <img src="images/project26.png" alt="SignSnap screen 3" onclick="openModal(this)">
+            <img src="images/project27.png" alt="SignSnap screen 4" onclick="openModal(this)">
+            <video src="videos/vid1.mp4" autoplay loop muted playsinline onclick="openModal(this, 'video')"></video>
         </div>
     </section>
 
+    <!-- ============ PROJECT: solAR ============ -->
+    <section class="project-view" id="solar"
+             data-title="solAR"
+             data-desc="Add your solAR description here.">
+        <a href="#" class="project-top-link"><i class="fa-solid fa-folder"></i> All Projects</a>
+        <h2>solAR</h2>
+        <p class="project-desc">Add your solAR description here.</p>
+        <a class="project-link" href="https://sol-ar.netlify.app/?fbclid=IwY2xjawVPNJVleHRuA2FlbQIxMQBwZG9mA3NydGMGYXBwX2lkATAAAR8L73W3XFK50Io9K1BFOwdO614MdcItcc4jSWiquBbZxilamu1_kyU5sNpW4g_aem_FVxel3qj41qC9J_oob7CYg" target="_blank" rel="noopener">Visit Project <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+        <div class="masonry-grid">
+            <!-- Add your solAR photos like this:
+            <img src="images/YOUR-FILE.png" alt="solAR photo 1" onclick="openModal(this)">
+            -->
+        </div>
+    </section>
+
+    <!-- ============ PROJECT: Fundamentals ============ -->
+    <section class="project-view" id="fundamentals"
+             data-title="Fundamentals: Basketball Workout Web Application"
+             data-desc="Designed the complete User Interface (UI) and visual layout using Figma, focusing on intuitive navigation and a cohesive color scheme.">
+        <a href="#" class="project-top-link"><i class="fa-solid fa-folder"></i> All Projects</a>
+        <h2>Fundamentals: Basketball Workout Web Application</h2>
+        <p class="project-desc">Designed the complete User Interface (UI) and visual layout using Figma, focusing on intuitive navigation and a cohesive color scheme.</p>
+        <a class="project-link" href="https://YOUR-FUNDAMENTALS-LINK.com" target="_blank" rel="noopener">Visit Project <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+        <div class="masonry-grid">
+            <img src="images/project3.png" alt="Fundamentals screen 1" onclick="openModal(this)">
+            <img src="images/project4.png" alt="Fundamentals screen 2" onclick="openModal(this)">
+            <img src="images/project5.png" alt="Fundamentals screen 3" onclick="openModal(this)">
+            <img src="images/project6.png" alt="Fundamentals screen 4" onclick="openModal(this)">
+            <img src="images/project7.png" alt="Fundamentals screen 5" onclick="openModal(this)">
+            <img src="images/project8.png" alt="Fundamentals screen 6" onclick="openModal(this)">
+            <img src="images/project9.png" alt="Fundamentals screen 7" onclick="openModal(this)">
+            <img src="images/project10.png" alt="Fundamentals screen 8" onclick="openModal(this)">
+            <img src="images/project11.png" alt="Fundamentals screen 9" onclick="openModal(this)">
+            <img src="images/project12.png" alt="Fundamentals screen 10" onclick="openModal(this)">
+            <img src="images/project13.png" alt="Fundamentals screen 11" onclick="openModal(this)">
+            <img src="images/project14.png" alt="Fundamentals screen 12" onclick="openModal(this)">
+            <img src="images/project15.png" alt="Fundamentals screen 13" onclick="openModal(this)">
+        </div>
+    </section>
+
+    <!-- ============ PROJECT: The Forsaken Soldier ============ -->
+    <section class="project-view" id="forsaken-soldier"
+             data-title="TechFiesta 2.0: Moriones Festival &mdash; The Forsaken Soldier"
+             data-desc="Designed 2D visual assets and UI elements for the mobile game &quot;The Forsaken Soldier&quot;.">
+        <a href="#" class="project-top-link"><i class="fa-solid fa-folder"></i> All Projects</a>
+        <h2>TechFiesta 2.0: Moriones Festival &mdash; The Forsaken Soldier</h2>
+        <p class="project-desc">Designed 2D visual assets and UI elements for the mobile game &quot;The Forsaken Soldier&quot;.</p>
+        <div class="masonry-grid">
+            <img src="images/project1.png" alt="The Forsaken Soldier asset 1" onclick="openModal(this)">
+            <img src="images/project2.png" alt="The Forsaken Soldier asset 2" onclick="openModal(this)">
+        </div>
+    </section>
+
+    <!-- ============ PROJECT: Anna ============ -->
+    <section class="project-view" id="anna"
+             data-title="&quot;Anna&quot; &mdash; Short Film Production"
+             data-desc="Designed key marketing assets, including the official film poster and production logo, to establish the film's brand.">
+        <a href="#" class="project-top-link"><i class="fa-solid fa-folder"></i> All Projects</a>
+        <h2>&quot;Anna&quot; &mdash; Short Film Production</h2>
+        <p class="project-desc">Designed key marketing assets, including the official film poster and production logo, to establish the film's brand.</p>
+        <a class="project-link" href="https://www.facebook.com/profile.php?id=61579997655931" target="_blank" rel="noopener">Visit Project <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+        <div class="masonry-grid">
+            <img src="images/project16.jpg" alt="Anna asset 1" onclick="openModal(this)">
+            <img src="images/project17.jpg" alt="Anna asset 2" onclick="openModal(this)">
+        </div>
+    </section>
+
+    <!-- ============ MODAL (unchanged look) ============ -->
     <div id="myModal" class="modal">
         <span class="close" onclick="closeModal()">&times;</span>
         <img class="modal-content" id="img01">
-
         <video class="modal-content" id="vid01" controls></video>
-
         <div id="caption"></div>
         <div id="description"></div>
     </div>
 
     <script>
-    // 1. Get the modal background
-    var modal = document.getElementById("myModal");
-    
-    // 2. Get the image, video, and text elements inside the modal
-    var modalImg = document.getElementById("img01");
-    var modalVid = document.getElementById("vid01"); 
-    var captionText = document.getElementById("caption");
-    var descText = document.getElementById("description");
+    // ---------- Folder / project switching ----------
+    var folderView = document.getElementById("folderView");
+    var pageTitle  = document.getElementById("pageTitle");
+    var headerBack = document.getElementById("headerBack");
+    var projects   = document.querySelectorAll(".project-view");
 
-    // 3. Function to OPEN the modal (Notice the new 'type' parameter)
+    function showView() {
+        var id = window.location.hash.replace("#", "");
+        var target = id ? document.getElementById(id) : null;
+
+        projects.forEach(function (p) { p.classList.remove("active"); });
+
+        if (target && target.classList.contains("project-view")) {
+            folderView.classList.add("hidden");
+            target.classList.add("active");
+            pageTitle.textContent = "Projects";
+            headerBack.href = "#";
+            headerBack.innerHTML = '<i class="fa-solid fa-arrow-left"></i> Back to Projects';
+        } else {
+            folderView.classList.remove("hidden");
+            pageTitle.textContent = "Projects";
+            headerBack.href = "index.html";
+            headerBack.innerHTML = '<i class="fa-solid fa-arrow-left"></i> Back to Home';
+        }
+        window.scrollTo(0, 0);
+    }
+
+    window.addEventListener("hashchange", showView);
+    showView();
+
+    // ---------- Modal (lightbox) ----------
+    var modal      = document.getElementById("myModal");
+    var modalImg   = document.getElementById("img01");
+    var modalVid   = document.getElementById("vid01");
+    var captionText = document.getElementById("caption");
+    var descText    = document.getElementById("description");
+
     function openModal(element, type) {
         modal.style.display = "block";
-        
-        // Copy the Title and Description for both images and videos
-        captionText.innerHTML = element.getAttribute("alt") || ""; 
-        descText.innerHTML = element.dataset.desc || ""; 
 
-        // IF IT IS A VIDEO:
+        // Title + description come from the project section the photo sits in
+        var section = element.closest(".project-view");
+        captionText.innerHTML = section ? section.dataset.title : "";
+        descText.innerHTML    = section ? section.dataset.desc : "";
+
         if (type === 'video') {
-            modalImg.style.display = "none";     // Hide the image tag
-            modalVid.style.display = "block";    // Show the video tag
-            modalVid.src = element.src;          // Copy the video source
-            modalVid.play();                     // Auto-play it!
-        } 
-        // IF IT IS AN IMAGE:
-        else {
-            modalVid.style.display = "none";     // Hide the video tag
-            modalImg.style.display = "block";    // Show the image tag
-            modalImg.src = element.src;          // Copy the image source
+            modalImg.style.display = "none";
+            modalVid.style.display = "block";
+            modalVid.src = element.src;
+            modalVid.play();
+        } else {
+            modalVid.style.display = "none";
+            modalImg.style.display = "block";
+            modalImg.src = element.src;
         }
     }
 
-    // 4. Function to CLOSE the modal
     function closeModal() {
         modal.style.display = "none";
-        modalVid.pause(); // CRITICAL: Stops the video from playing in the background!
-        modalVid.src = ""; // Clears the video source
+        modalVid.pause();
+        modalVid.src = "";
     }
 
-    // 5. Close if user clicks outside the image/video
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            closeModal(); // Uses the new close function so the video stops properly
-        }
-    }
-</script>
+    window.onclick = function (event) {
+        if (event.target == modal) closeModal();
+    };
+    </script>
 
     <footer>
         <p>&copy; 2026 Iya. All Rights Reserved.</p>
