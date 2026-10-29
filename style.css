@@ -25,7 +25,7 @@ body {
 .hero {
     height: 100vh; 
     width: 100%;
-    background-image:url('images/windows2.png');
+    background-image:url('images/windows.jpg');
 
     background-size: cover;     /* Shrinks/grows the image to cover the whole area */
     background-position: center;  /* Centers the image so the middle is always visible */
@@ -416,7 +416,7 @@ footer p {
 
 @media (max-width: 600px) {
     .masonry-grid {
-        column-count: 1; /* 1 column on phones */
+        column-count: 2; 
     }
 }
 
@@ -507,55 +507,7 @@ footer p {
     }
 }
 
-/* ===========================
-   AUDIO PAGE STYLES
-   =========================== */
 
-/* Creates a responsive grid that adjusts based on screen size */
-.audio-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    margin-top: 20px;
-}
-
-/* The card that holds the text and the player */
-.audio-card {
-    background: #ffffff;
-    padding: 25px;
-    border-radius: 15px;
-    text-align: center;
-    border: 2px solid #e0e0e0;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.audio-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
-}
-
-.audio-card h3 {
-    font-family: 'VT323', monospace;
-    font-size: 2rem;
-    font-weight: normal;
-    color: #282828;
-    margin-bottom: 5px;
-}
-
-.audio-card p {
-    font-family: 'Poppins', sans-serif;
-    font-size: 0.9rem;
-    color: #666;
-    margin-bottom: 20px;
-}
-
-/* Makes sure both audio and video players stretch nicely inside the card */
-.audio-card audio, 
-.audio-card video {
-    width: 100%;
-    border-radius: 8px;
-    outline: none;
-}
 /* ===========================
    MOBILE RESPONSIVE STYLES
    =========================== */
@@ -576,7 +528,7 @@ footer p {
     /* 2. ABOUT ME SECTION */
     .about-content {
         flex-direction: column; /* Stacks your image on top of your text */
-        gap: 20px;
+        gap: 10px;
         text-align: center; /* Centers your bio text on mobile */
     }
 
@@ -589,11 +541,11 @@ footer p {
     }
 
     .about-text h2 {
-        font-size: 3.5rem; 
+        font-size: 3.2rem; 
     }
 
     .about-text p {
-        font-size: 0.9rem; 
+        font-size: 0.7rem; 
     }
 
     /* 3. MY WORKS SECTION */
@@ -603,13 +555,104 @@ footer p {
         padding: 80px 0; 
     }
 
+    .content-list h2 {
+        font-size: 3.2rem; 
+        text-align: center;
+    }
+
     .works-title {
         font-size: 4rem; 
+        
     }
 
     .works-grid {
-        gap: 40px; /* Reduces the massive 80px gap */
-        flex-direction: column; /* Stacks your icons vertically */
+        gap: 35px; /* Reduces the massive 80px gap */
+        flex-direction: row; /* Stacks your icons vertically */
         align-items: center;
     }
+}
+
+/* solAR: larger, centered photos */
+#solar .masonry-grid {
+    column-count: unset;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+#solar .masonry-grid img,
+#solar .masonry-grid video {
+    width: calc(50% - 10px);
+    max-width: 560px;
+    height: auto;
+    margin: 0;
+}
+
+@media (max-width: 600px) {
+    #solar .masonry-grid img,
+    #solar .masonry-grid video {
+        width: 100%;
+    }
+}
+
+/* ===== About photo stack ===== */
+.about-image .photo-stack {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    aspect-ratio: 3 / 4;
+    margin: 0 0 20px -100px;   /* was: 0 auto 20px */
+    left: 0;                   /* was: -8px */
+    cursor: pointer;
+}
+
+.about-image .photo-stack img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    margin: 0;
+    object-fit: cover;
+    border-radius: 17px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    transition: transform 0.4s ease, opacity 0.3s ease;
+    user-select: none;
+}
+
+/* where each card sits in the pile */
+.photo-stack img[data-pos="0"] { transform: none; }
+.photo-stack img[data-pos="1"] { transform: translate(18px, -12px) rotate(3deg); }
+.photo-stack img[data-pos="2"] { transform: translate(34px, -22px) rotate(6deg); }
+.photo-stack img[data-pos="3"] { transform: translate(-18px, -16px) rotate(-4deg); }
+
+/* the top card flying off when clicked */
+.photo-stack img.flick {
+    transform: translate(70%, -10%) rotate(12deg);
+    opacity: 0;
+}
+
+@media (max-width: 768px) {
+    .about-section {
+        overflow-x: hidden;
+        overflow-x: clip;
+    }
+
+    .about-image {
+        align-self: center;
+        width: 100%;
+        padding: 0 24px;
+    }
+
+    .about-image .photo-stack {
+        width: min(260px, 65vw);
+        max-width: none;
+        margin: 0 auto 30px;
+        left: 0;
+    }
+
+    .photo-stack img[data-pos="1"] { transform: translate(10px, -8px) rotate(3deg); }
+    .photo-stack img[data-pos="2"] { transform: translate(18px, -14px) rotate(6deg); }
+    .photo-stack img[data-pos="3"] { transform: translate(-10px, -10px) rotate(-4deg); }
 }

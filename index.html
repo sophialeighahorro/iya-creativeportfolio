@@ -23,14 +23,18 @@
         <div class="container">
             <div class="about-content">
                 <div class="about-image">
-                    <img src="images/sophia2.png" alt="Iya">
+                    <div class="photo-stack" id="photoStack" role="button" tabindex="0" aria-label="Click to shuffle photos">
+                        <img src="images/sophia2.png" alt="Iya">
+                        <img src="images/sophia3.png" alt="Iya">
+                        <img src="images/sophia4.png" alt="Iya">
+                        <img src="images/sophia1.png" alt="Iya">
                 </div>
+            </div>
                 
                 <div class="about-text">
                     <h2>Hi, I'm Iya!</h2>
                     <p>
-                        I’m a Creative Tech student who loves making things look good on digital platforms. I’m passionate about using my technical background to inform my creative process, building work that is as thoughtful as it is beautiful. Beyond my studies, I channel that same eye for design into the fashion and beauty space as a TikTok affiliate and content creator.
-                    </p>
+                        Hi! I'm all about great aesthetics and bringing creative ideas to life online~ As a student designer, I live for thoughtful layouts, gorgeous visuals, and making things look effortlessly cool. Outside of school, I channel that passion straight into fashion and beauty content as a TikTok affiliate.
 
                     <h3>Software Proficiency</h3>
 
@@ -119,6 +123,38 @@
             <p>&copy; 2026 Sophia Leigh Ahorro. All Rights Reserved.</p>
         </div>
     </footer>
+
+    <script>
+    var stack = document.getElementById("photoStack");
+    var cards = Array.from(stack.querySelectorAll("img"));
+    var busy = false;
+
+    function layoutStack() {
+        cards.forEach(function (card, i) {
+            card.dataset.pos = i;
+            card.style.zIndex = cards.length - i;
+        });
+    }
+    layoutStack();
+
+    function nextPhoto() {
+        if (busy) return;
+        busy = true;
+        var top = cards[0];
+        top.classList.add("flick");
+        setTimeout(function () {
+            cards.push(cards.shift());   // top card goes to the back
+            top.classList.remove("flick");
+            layoutStack();
+            busy = false;
+        }, 350);
+    }
+
+    stack.addEventListener("click", nextPhoto);
+    stack.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); nextPhoto(); }
+    });
+</script>
 
 </body>
 </html>
